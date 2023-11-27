@@ -1,0 +1,21 @@
+﻿@model List<Todo>
+
+<h1>Todo List</h1>
+
+<form asp-action="AddTodo" method="post">
+    <input type="text" name="title" required />
+    <button type="submit">Add Todo</button>
+</form>
+
+<ul>
+    @foreach (var todo in Model)
+    {
+        <li>
+            <form asp-action="ToggleDone" method="post">
+                <input type="hidden" name="id" value="@todo.Id" />
+                <input type="checkbox" name="isDone" @(todo.IsDone ? "checked" : "") onchange="this.form.submit()" />
+                @todo.Title
+            </form>
+        </li>
+    }
+</ul>
